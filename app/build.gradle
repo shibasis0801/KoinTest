@@ -1,0 +1,95 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+}
+
+apply from: '../dependencies.gradle'
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.example.koin"
+        minSdk 24
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation project(path : ':domain')
+    implementation androidx.coreKtx
+    implementation androidx.appCompat
+    implementation androidx.constraintlayout
+    implementation androidx.lifecycleExt
+    implementation androidx.activityKtx
+    implementation androidx.recycler_view
+
+    implementation google.material
+
+    // LiveData
+    implementation androidx.lifecycleLiveData
+
+    // ViewModel
+    implementation androidx.lifecycleViewModel
+
+    // Navigation
+    implementation androidx.navigationFragment
+    implementation androidx.navigationUi
+
+    // Koin
+    implementation koin.koinAndroid
+    implementation koin.koinAndroidCompat
+    implementation koin.koinWorkManager
+    implementation koin.koinNavigation
+
+    //Coroutine
+    implementation coroutines.coroutinesCore
+    implementation coroutines.coroutinesAndroid
+
+    //Glide
+    implementation others.glide
+
+    // Coroutine Testing
+    testImplementation testing.unitTestingCoroutines
+    testImplementation testing.unitTestingMockitoCore
+    // testImplementation testing.unitTestingMockitoAndroid
+
+    // Koin Testing
+    testImplementation testing.koinTest
+    testImplementation testing.koinTestJunit
+    testImplementation testing.koinTestJvm
+
+//    debugImplementation 'com.facebook.flipper:flipper:0.166.0'
+    debugImplementation 'com.facebook.soloader:soloader:0.10.4'
+
+//    releaseImplementation 'com.facebook.flipper:flipper-noop:0.166.0'
+
+    testImplementation testing.unitTestingCore
+    testImplementation testing.unitTestingJunit
+    androidTestImplementation  testing.uiTestingJunit
+    androidTestImplementation  testing.uiTestingEspresso
+}
